@@ -291,10 +291,37 @@ or most optimal searcher."
            :not ("(defun test-asdf (blah)" "(defun test-blah\n"
                  "(defun tester (blah)" "(defun test? (blah)" "(defun test- (blah)"))
 
+    (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
+           :regex "\\\(defmethod\\s+JJJ\\j"
+           ;; \\j usage see `dumb-jump-ag-word-boundary`
+           :tests ("(defmethod test (blah)" "(defmethod test\n")
+           :not ("(defmethod test-asdf (blah)" "(defmethod test-blah\n"
+                 "(defmethod tester (blah)" "(defmethod test? (blah)" "(defun test- (blah)"))
+
     (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
            :regex "\\\(defparameter\\b\\s*JJJ\\j"
            :tests ("(defparameter test " "(defparameter test\n")
            :not ("(defparameter tester" "(defparameter test?" "(defparameter test-"))
+
+    (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
+           :regex "\\\(defvar\\b\\s*JJJ\\j"
+           :tests ("(defvar test " "(defvar test\n")
+           :not ("(defvar tester" "(defvar test?" "(defvar test-"))
+
+    (:type "variable" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
+           :regex "\\\(defconstant\\b\\s*JJJ\\j"
+           :tests ("(defconstant test " "(defconstant test\n")
+           :not ("(defconstant tester" "(defconstant test?" "(defconstant test-"))
+
+    (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
+           :regex "\\\(defclass\\b\\s*JJJ\\j"
+           :tests ("(defclass test " "(defclass test\n")
+           :not ("(defclass tester" "(defclass test?" "(defclass test-"))
+
+    (:type "type" :supports ("ag" "grep" "rg" "git-grep") :language "commonlisp"
+           :regex "\\\(deftype\\b\\s*JJJ\\j"
+           :tests ("(deftype test " "(deftype test\n")
+           :not ("(deftype tester" "(deftype test?" "(deftype test-"))
 
     ;; racket
     (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "racket"
